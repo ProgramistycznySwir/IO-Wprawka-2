@@ -8,18 +8,21 @@ int Licznik = 0;
 int main ()
 {
     pthread_t th0, th1;
-    int pthread_create(pthread_t* th0, pthread_attr_t attr, void* (*start_routine)(void*) Display, void* arg);
-    int pthread_create(pthread_t* th1, pthread_attr_t attr, void* (*start_routine)(void*), void* arg);
+    pthread_attr_t attr;
+    char* arg = "gah";
+    // int th0_result = pthread_create(&th0, NULL, Display, (void*) arg);
+    int th0_result = pthread_create(&th0, NULL, Display, NULL);
+    int th1_result = pthread_create(&th1, NULL, Increment, NULL);
 }
 
-void Display (void* args)
+void* Display (void* args)
 {
-    while(true)
+    while(1)
         printf("%d\n", Licznik);
 }
 
-void Increment (void* args)
+void* Increment (void* args)
 {
-    while(true)
+    while(1)
         Licznik++;
 }
