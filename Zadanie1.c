@@ -9,7 +9,8 @@
 ///
 /// Możemy tylko zgadywać, ale prawdopodobnie optymalizacja doprowadza do tego,
 ///  że drugi wątek jest zagładzany przez pierwszy przez to nie wykonuje ani
-///  jednej iteracji.
+///  jednej iteracji (można to wnioskować z tego że tekst "Started Increment()"
+///  nie jest nawet wypisywany).
 /// Warto także zaznaczyć, że w pierwszym przypadku wartość Licznik nie jest
 ///  aktualizowana równomiernie, to znaczy - funkcja Display() często wyświetla
 ///  kilka razy tą samą wartość, albo wyświetla wartość z dużymi przeskokami.
@@ -32,7 +33,7 @@ int main ()
     if(th0_result || th1_result)
     {
         printf("Error when attempting to create new thread!\n");
-        exit(-1);
+        exit(1);
     }
 
 
@@ -43,7 +44,7 @@ int main ()
     if(th0_result || th1_result)
     {
         printf("Error when attempting to join new threads!\n");
-        exit(-1);
+        exit(1);
     }
 
 

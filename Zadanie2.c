@@ -6,53 +6,43 @@
 #define NUMBER_OF_THREADS 10
 
 void* Thread (void* arg) {
-    int n = rand() % 10001;
+    int k = rand() % 10000;
 
-    for (int i = 0; i < n; ++i) {
-        printf("Thread #%ld, i = %d\n", (long) arg, i);
-    }
+    for (int i = 0; i < k; ++i)
+        printf("Thread #%ld, iteration %d/%d\n", (long) arg, i, k);
 
-    pthread_exit((void*) (intptr_t) n);
+    pthread_exit((void*) (intptr_t) k);
 }
 
-int main() {
+int main()
+{
     pthread_t threads[NUMBER_OF_THREADS];
-    pthread_attr_t attr;
+    // pthread_attr_t attr;
 
-    pthread_attr_init(&attr);
-    pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
-
-    int error = 0;
-    for (long i = 0; i < NUMBER_OF_THREADS; ++i) {
-        if (pthread_create(&threads[i], &attr, Thread, (void*) i)) {
-            error = 1;
-            break;
+    for (long i = 0; i < NUMBER_OF_THREADS; ++i)
+    {
+        if (pthread_create(&threads[i], NULL, Thread, (void*) i))
+        {
+            printf("Error creating thread no. %d\n", i);
+            exit(1);
         }
     }
 
-    pthread_attr_destroy(&attr);
 
-    if (error) {
-        fprintf(stderr, "Error creating new thread.");
-        exit(EXIT_FAILURE);
-    }
-
-    long sum = 0;
-    for (int i = 0; i < NUMBER_OF_THREADS; ++i) {
-        void *status;
-        if (pthread_join(threads[i], &status)) {
-            error = 1;
-            break;
+    long summaryIterations = 0;
+    for (int i = 0; i < NUMBER_OF_THREADS; ++i)
+    {
+        void* status;
+        if (pthread_join(threads[i], &status))
+        {
+            printf("Error joining thread %d\n", i);
+            exit(EXIT_FAILURE);
         }
 
-        sum += (long) status;
+        summaryIterations += (long) status;
     }
 
-    if (error) {
-        fprintf(stderr, "Error joining threads.");
-        exit(EXIT_FAILURE);
-    }
-
-    printf("Iterations: %ld\n", sum);
-    pthread_exit(NULL);
+    printf("\nNumber of iterations: %ld\n", summaryIterations);
+    return 0;
+    // pthread_exit(NULL);
 }
