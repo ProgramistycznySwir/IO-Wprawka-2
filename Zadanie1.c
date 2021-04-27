@@ -3,6 +3,15 @@
 #include <pthread.h>
 #include <time.h>
 
+/// Wnioski:
+///  - Jeśli nie użyjemy flagi -O3 program działa poprawnie.
+///  - Jeśli użyjemy flagi -O3 działa tylko jeden wątek.
+///
+/// Możemy tylko zgadywać, ale prawdopodobnie optymalizacja doprowadza do tego,
+///  że drugi wątek jest zagładzany przez pierwszy przez to nie wykonuje ani
+///  jednej iteracji.
+
+
 int Licznik = 0;
 
 void* Display (void* args);
