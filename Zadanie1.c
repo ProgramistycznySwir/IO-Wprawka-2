@@ -25,8 +25,8 @@ int main ()
 
 
     void* status;
-    int th0_result = pthread_join(th0, &status);
-    int th1_result = pthread_join(th1, &status);
+    th0_result = pthread_join(th0, &status);
+    th1_result = pthread_join(th1, &status);
 
     if(th0_result || th1_result)
     {
