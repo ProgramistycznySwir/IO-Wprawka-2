@@ -10,6 +10,9 @@
 /// Możemy tylko zgadywać, ale prawdopodobnie optymalizacja doprowadza do tego,
 ///  że drugi wątek jest zagładzany przez pierwszy przez to nie wykonuje ani
 ///  jednej iteracji.
+/// Warto także zaznaczyć, że w pierwszym przypadku wartość Licznik nie jest
+///  aktualizowana równomiernie, to znaczy - funkcja Display() często wyświetla
+///  kilka razy tą samą wartość, albo wyświetla wartość z dużymi przeskokami.
 
 
 int Licznik = 0;
