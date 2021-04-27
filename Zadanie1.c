@@ -42,12 +42,14 @@ int main ()
 
 void* Display (void* args)
 {
+    printf("Started Display()\n");
     while(1)
         printf("%d\n", Licznik);
 }
 
 void* Increment (void* args)
 {
+    printf("Started Increment()\n");
     while(1)
         Licznik++;
 }
