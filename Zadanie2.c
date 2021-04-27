@@ -8,7 +8,7 @@
 void* Thread (void* arg) {
     int k = rand() % 10000;
 
-    for (int i = 0; i < k; ++i)
+    for (int i = 0; i < k; i++)
         printf("Thread #%ld, iteration %d/%d\n", (long) arg, i, k);
 
     pthread_exit((void*) (intptr_t) k);
@@ -19,9 +19,9 @@ int main()
     pthread_t threads[NUMBER_OF_THREADS];
     // pthread_attr_t attr;
 
-    for (int i = 0; i < NUMBER_OF_THREADS; ++i)
+    for (int i = 0; i < NUMBER_OF_THREADS; i++)
     {
-        if (pthread_create(&threads[i], NULL, Thread, (void*) i))
+        if (pthread_create(&threads[i], NULL, Thread, NULL))
         {
             printf("Error creating thread no. %d\n", i);
             exit(1);
@@ -30,7 +30,7 @@ int main()
 
 
     long summaryIterations = 0;
-    for (int i = 0; i < NUMBER_OF_THREADS; ++i)
+    for (int i = 0; i < NUMBER_OF_THREADS; i++)
     {
         void* status;
         if (pthread_join(threads[i], &status))
