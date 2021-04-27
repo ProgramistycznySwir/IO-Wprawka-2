@@ -19,7 +19,7 @@ int main()
     pthread_t threads[NUMBER_OF_THREADS];
     // pthread_attr_t attr;
 
-    for (long i = 0; i < NUMBER_OF_THREADS; ++i)
+    for (int i = 0; i < NUMBER_OF_THREADS; ++i)
     {
         if (pthread_create(&threads[i], NULL, Thread, (void*) i))
         {
