@@ -20,13 +20,11 @@ int main()
     // pthread_attr_t attr;
 
     for (long i = 0; i < NUMBER_OF_THREADS; i++)
-    {
         if (pthread_create(&threads[i], NULL, Thread, (void*) i))
         {
             printf("Error creating thread no. %ld\n", i);
             exit(1);
         }
-    }
 
 
     long summaryIterations = 0;
